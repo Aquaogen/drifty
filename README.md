@@ -2,13 +2,14 @@
 
 The Ionic Framework command line utility makes it easy to start, build, run, and emulate apps.
 
-## Installing
+## Develop
+### Install
 
 ```bash
 $ npm install -g ionic
 ```
 
-## Starting
+### Start
 
 ```bash
 $ ionic start myapp [template]
@@ -23,13 +24,30 @@ __Named template starters:__
 * [complex-list](https://github.com/driftyco/ionic-starter-complex-list)
 * [blank](https://github.com/driftyco/ionic-starter-blank)
 
-## Add a Platform Target
+### Configure
+
+The ionic.project is a configuration for an ionic project that stores the following:
+
+* `app_id` - the associated app ID in ionic.io.  
+* `browsers` - the installed browsers (CrossWalk).  
+* `createDocumentRoot` - boolean setting stating to create the designated.document root upon serve (for CI, using `app` folder, and compiling)  
+* `defaultBrowser` - the browser they prefer to use with `ionic serve`. Chrome, Firefox, etc.  
+* `documentRoot` - the associated document root with HTML/JS/CSS files.  
+* `gulpDependantTasks` - gulp tasks that are run before `ionic serve` launches. Think of `gulp build`, `gulp sass`, etc.  
+* `gulpStartupTasks` - gulp tasks that are run and kept alive during `ionic serve`.  
+* `imagePaths` - paths relative to document root that specify the release feature to compress images.  
+* `proxies` - designated proxies to use during `ionic serve`.  
+* `name` - the name of the application.  
+* `sass` - the setting to watch sass during `ionic serve`.  
+* `watchPatterns` - the patterns to watch and live reload during `ionic.serve`.  
+
+### Target
 
 ```bash
 $ ionic platform ios android
 ```
 
-### Live Reload Application During Development
+#### Live Reload Application During Development
 
 __Command-line flags/options for `run` and `emulate`:__
 
@@ -50,65 +68,14 @@ While the server is running for live reload, you can use the following commands 
     consolelogs or c to enable/disable console log output
     serverlogs or s to enable/disable server log output
     quit or q to shutdown the server and exit
-
-## Building
-
-```bash
-$ ionic build ios
-```
-
-## Emulating
-
-Deploys the Ionic app on specified platform emulator. This is simply an alias for `run --emulator`.
-
-```bash
-$ ionic emulate ios [options]
-```
-
-## Running
-
-Deploys the Ionic app on specified platform devices. If a device is not found it'll then deploy to an emulator/simulator.
-
-```bash
-$ ionic run ios [options]
-```
-
-### Icon Source Image
-
-```bash
-$ ionic resources --icon
-```
-
-### Splash Screen Source Image
-
-```bash
-$ ionic resources --splash
-```
-### Generating Icons and Splash Screens
-
-To generate both icons and splash screens, follow the instructions above and run:
-
-```bash
-$ ionic resources
-```
-
-### Platform Specific Resource Images
-
-One source image can be used to generate images for each platform by placing the file within the `resources` directory, such as `resources/icon.png`. To use different source images for individual platforms, place the source image in the respective platform's directory. For example, to use a different icon for Android, it should follow this path: `resources/android/icon.png`, and a different image for iOS would use this path: `resources/ios/icon.png`.
-
-### Generating Exact Platform Resources
-
-```bash
-$ ionic resources ios
-```
-
-## Serve
+## Test
+### Serve
 
 ```bash
 $ ionic serve [options]
 ```
 
-### Options
+#### Options
 
 __Command-line flags/options:__
 
@@ -124,7 +91,7 @@ __Command-line flags/options:__
     [--nogulp] ..............  Serve without running gulp tasks
     [--platform|-t] .........  Serve the platform specific styles in the browser (ios/android)
 
-#### Using Ionic Labs
+##### Using Ionic Labs
 
 We've extended the serve command to open the new Lab UI that features iOS and Android side-by-side.
 
@@ -132,7 +99,60 @@ We've extended the serve command to open the new Lab UI that features iOS and An
 $ ionic serve --lab
 ```
 
-## Packaging
+### Emulate
+
+Deploys the Ionic app on specified platform emulator. This is simply an alias for `run --emulator`.
+
+```bash
+$ ionic emulate ios [options]
+```
+
+### Run
+
+Deploys the Ionic app on specified platform devices. If a device is not found it'll then deploy to an emulator/simulator.
+
+```bash
+$ ionic run ios [options]
+```
+
+## Release
+### Resource
+#### Icon Source Image
+
+```bash
+$ ionic resources --icon
+```
+
+#### Splash Screen Source Image
+
+```bash
+$ ionic resources --splash
+```
+#### Generating Icons and Splash Screens
+
+To generate both icons and splash screens, follow the instructions above and run:
+
+```bash
+$ ionic resources
+```
+
+#### Platform Specific Resource Images
+
+One source image can be used to generate images for each platform by placing the file within the `resources` directory, such as `resources/icon.png`. To use different source images for individual platforms, place the source image in the respective platform's directory. For example, to use a different icon for Android, it should follow this path: `resources/android/icon.png`, and a different image for iOS would use this path: `resources/ios/icon.png`.
+
+#### Generating Exact Platform Resources
+
+```bash
+$ ionic resources ios
+```
+
+### Build
+
+```bash
+$ ionic build ios
+```
+
+### Package
 
 Using Ionic's service, you can compile and package your project into an app-store ready app without
 requiring native SDKs on your machine.
@@ -142,21 +162,3 @@ $ ionic package debug android
 ```
 
 The third argument can be either `debug` or `release`, and the last argument can be either `android` or `ios`.
-
-
-# File ionic.project
-
-The ionic.project is a configuration for an ionic project that stores the following:
-
-* `app_id` - the associated app ID in ionic.io.  
-* `browsers` - the installed browsers (CrossWalk).  
-* `createDocumentRoot` - boolean setting stating to create the designated.document root upon serve (for CI, using `app` folder, and compiling)  
-* `defaultBrowser` - the browser they prefer to use with `ionic serve`. Chrome, Firefox, etc.  
-* `documentRoot` - the associated document root with HTML/JS/CSS files.  
-* `gulpDependantTasks` - gulp tasks that are run before `ionic serve` launches. Think of `gulp build`, `gulp sass`, etc.  
-* `gulpStartupTasks` - gulp tasks that are run and kept alive during `ionic serve`.  
-* `imagePaths` - paths relative to document root that specify the release feature to compress images.  
-* `proxies` - designated proxies to use during `ionic serve`.  
-* `name` - the name of the application.  
-* `sass` - the setting to watch sass during `ionic serve`.  
-* `watchPatterns` - the patterns to watch and live reload during `ionic.serve`.  
