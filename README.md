@@ -1,4 +1,4 @@
-Ionic CLI
+# Ionic CLI
 
 The Ionic Framework command line utility makes it easy to start, build, run, and emulate apps.
 
