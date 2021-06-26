@@ -1,11 +1,8 @@
-[![Circle CI](https://circleci.com/gh/driftyco/ionic-cli.svg?style=svg)](https://circleci.com/gh/driftyco/ionic-cli)
 
 Ionic-Cli
 =========
 
-The Ionic Framework command line utility makes it easy to start, build, run, and emulate [Ionic](http://ionicframework.com/) apps. In addition, it comes with (optional!)  integration with the [Ionic Platform](http://ionic.io/), a set of mobile services perfect for Ionic apps.
-
-Use the `ionic --help` command for more detailed task information.
+The Ionic Framework command line utility makes it easy to start, build, run, and emulate [Ionic](http://ionicframework.com/) apps.
 
 ## Installing
 
@@ -13,16 +10,11 @@ Use the `ionic --help` command for more detailed task information.
 $ npm install -g ionic
 ```
 
-*Note: For a global install of `-g ionic`, OSX/Linux users may need to prefix the command with `sudo` or can setup [proper file permissions on OSX for npm](http://www.johnpapa.net/how-to-use-npm-global-without-sudo-on-osx/) to install without `sudo`. *
-
-
 ## Starting an Ionic App
 
 ```bash
 $ ionic start myapp [template]
 ```
-
-Starter templates can either come from a named template, a Github repo, a Codepen, or a local directory. A starter template is what becomes the `www` directory within the Cordova project.
 
 __Named template starters:__
 
@@ -33,36 +25,6 @@ __Named template starters:__
 * [complex-list](https://github.com/driftyco/ionic-starter-complex-list)
 * [blank](https://github.com/driftyco/ionic-starter-blank)
 
-__Github Repo starters:__
-
-* Any Github repo url, ex: [https://github.com/driftyco/ionic-starter-tabs](https://github.com/driftyco/ionic-starter-tabs)
-* Named templates are simply aliases to Ionic starter repos
-
-__Codepen URL starters:__
-
-* Any Codepen url, ex: [http://codepen.io/ionic/pen/odqCz](http://codepen.io/ionic/pen/odqCz)
-* [Ionic Codepen Demos](http://codepen.io/ionic/public-list/)
-
-__Plunker URL starters:__
-
-* Any Plunker url, ex: [http://embed.plnkr.co/dFvL8n/preview](http://embed.plnkr.co/dFvL8n/preview)
-
-__Local directory starters:__
-
-* Relative or absolute path to a local directory
-
-__Command-line flags/options:__
-
-    [--appname|-a]  .......  Human readable name for the app
-                             (Use quotes around the name)
-    [--id|-i]  ............  Package name set in the <widget id> config
-                             ex: com.mycompany.myapp
-    [--no-cordova|-w]  ....  Do not create an app targeted for Cordova
-    [--sass|-s] ...........  Setup the project to use Sass CSS precompiling
-    [--list|-l]  ..........  List starter templates available
-    
-    [--io-app-id] .........  The Ionic.io app ID to use
-
 ## Adding a platform target
 
 ```bash
@@ -71,23 +33,11 @@ $ ionic platform ios android
 
 ## Testing in a Browser
 
-Use `ionic serve` to start a local development server for app dev and testing. This is useful for both desktop browser testing, and to test within a device browser which is connected to the same network. Additionally, this command starts LiveReload which is used to monitor changes in the file system. As soon as you save a file the browser is refreshed automatically. View [Using Sass](https://github.com/driftyco/ionic-cli/blob/master/README.md#using-sass) if you would also like to have `ionic serve` watch the project's Sass files.
-
 ```bash
 $ ionic serve [options]
 ```
 
-## Building your app
-
-```bash
-$ ionic build ios
-```
-
-## Live Reload App During Development (beta)
-
-The `run` or `emulate` command will deploy the app to the specified platform devices/emulators. You can also run __live reload__ on the specified platform device by adding the `--livereload` option. The live reload functionality is similar to `ionic serve`, but instead of developing and debugging an app using a standard browser, the compiled hybrid app itself is watching for any changes to its files and reloading the app when needed. This reduces the requirement to constantly rebuild the app for small changes. However, any changes to plugins will still require a full rebuild. For live reload to work, the dev machine and device must be on the same local network, and the device must support [web sockets](http://caniuse.com/websockets).
-
-With live reload enabled, an app's console logs can also be printed to the terminal/command prompt by including the `--consolelogs` or `-c` option. Additionally, the development server's request logs can be printed out using `--serverlogs` or `-s` options.
+### Live Reload App During Development
 
 __Command-line flags/options for `run` and `emulate`:__
 
@@ -109,6 +59,11 @@ While the server is running for live reload, you can use the following commands 
     serverlogs or s to enable/disable server log output
     quit or q to shutdown the server and exit
 
+## Building your app
+
+```bash
+$ ionic build ios
+```
 
 ## Emulating your app
 
@@ -126,37 +81,17 @@ Deploys the Ionic app on specified platform devices. If a device is not found it
 $ ionic run ios [options]
 ```
 
-## Icon and Splash Screen Image Generation
-
-[Automatically generate icons and splash screens](http://ionicframework.com/blog/automating-icons-and-splash-screens/) from source images to create each size needed for each platform, in addition to copying each resized and cropped image into each platform's resources directory. Source images can either be a `png`, `psd` __Photoshop__ or `ai` __Illustrator__ file. Images are generated using Ionic's image resizing and cropping server, instead of requiring special libraries and plugins to be installed locally.
-
-Since each platform has different image requirements, it's best to make a source image for the largest size needed, and let the CLI do all the resizing, cropping and copying for you. Newly generated images will be placed in the `resources` directory at the root of the Cordova project. Additionally, the CLI will update and add the correct `<platform>` configs to the project's [config.xml](http://cordova.apache.org/docs/en/edge/config_ref_images.md.html#Icons%20and%20Splash%20Screens) file.
-
-During the build process, Cordova (v3.6 or later) will look through the project's [config.xml](http://cordova.apache.org/docs/en/edge/config_ref_images.md.html#Icons%20and%20Splash%20Screens) file and copy the newly created resource images to the platform's specific resource folder. For example, Android's resource folder can be found in `platforms/android/res`, and iOS uses `platforms/ios/APP_NAME/Resources`.
-
-
 ### Icon Source Image
-
-Save an `icon.png`, `icon.psd` or `icon.ai` file within the `resources` directory at the root of the Cordova project. The icon image's minimum dimensions should be 192x192 px, and should have __no__ rounded corners. Note that each platform will apply it's own mask and effects to the icons. For example, iOS will automatically apply it's custom rounded corners, so the source file should not already come with rounded corners. This [Photoshop icon template](http://code.ionicframework.com/resources/icon.psd) provides the recommended size and guidelines of the artwork's safe zone.
 
 ```bash
 $ ionic resources --icon
 ```
 
-- [Photoshop Icon Template](http://code.ionicframework.com/resources/icon.psd)
-
-
 ### Splash Screen Source Image
-
-Save a `splash.png`, `splash.psd` or `splash.ai` file within the `resources` directory at the root of the Cordova project. Splash screen dimensions vary for each platform, device and orientation, so a square source image is required the generate each of various sizes. The source image's minimum dimensions should be 2208x2208 px, and its artwork should be centered within the square, knowning that each generated image will be center cropped into landscape and portait images. The splash screen's artwork should roughly fit within a center square (1200x1200 px). This [Photoshop splash screen template](http://code.ionicframework.com/resources/splash.psd) provides the recommended size and guidelines of the artwork's safe zone. Additionally, when the `Orientation` [preference config](http://cordova.apache.org/docs/en/edge/config_ref_index.md.html#The%20config.xml%20File_global_preferences) is set to either `landscape` or `portrait` mode, then only the necessary images will be generated.
 
 ```bash
 $ ionic resources --splash
 ```
-
-- [Photoshop Splash Screen Template](http://code.ionicframework.com/resources/splash.psd)
-
-
 ### Generating Icons and Splash Screens
 
 To generate both icons and splash screens, follow the instructions above and run:
@@ -171,41 +106,13 @@ One source image can be used to generate images for each platform by placing the
 
 ### Generating Exact Platform Resources
 
-By default the `ionic resources` command will automatically figure out which platforms it should generate according to what platforms have been added to your project. However, you can also explicitly state which resources should be built by providing a platform name in the command. The example below would generate only `ios` resources (even if the platform hasn't been added to the project).
-
 ```bash
 $ ionic resources ios
 ```
 
-### Default Ionic Resources
-
-Ionic provides you some default icons and splash screens to give you a better idea of how to size your icons and splashscreen, as well as how to modify your config.xml file for your own icons.
-
-```bash
-$ ionic resources --default
-```
-
-If you already have a resources directory, the command above will not over write your files. If you wish to force an over write, use `ionic resources --default --force`.
-
-When starting a new app and adding a platform `ionic platform add ios` - the default icons and splashscreens will be downloaded and your config.xml will be modified to set up the default resources. This should help you identify your Ionic apps easier as well as help you get the file structure and configuration correct.
 
 
-## Crosswalk for Android
 
-In v1.3.0 and later, you can now specify which browser to use in your Cordova Android projects. Currently we only support [Crosswalk](https://crosswalk-project.org/) and have plans to support more browsers later.
-
-Execute `ionic browser add crosswalk` to add the Crosswalk browser to your Android project. By default, this will install the `12.41.296.5` version of Crosswalk.
-
-If you'd like to specify a different version of Crosswalk, run `ionic browser list` to see which browsers are available and what versions. Then run `ionic browser add crosswalk@10.39.235.15`.
-
-All that is left is to run the project as normal - `ionic run android`.
-
-If you'd like to build without Crosswalk for Android SDK 21 or later, do the following:
-
-```
-ionic browser revert android
-ionic build android --release -- --minSdkVersion 21
-```
 
 ## Advanced serve options
 
